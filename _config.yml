@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: dllyiuk@126.com
 description: "欢迎来到洋仔的个人博客，探讨技术与未来。"
 keyword: "Yang, 洋仔, 洋仔的博客, Yang Blog, 博客, 个人网站, 互联网, Web, 工程师, IT, 通信, 通讯"
-url: "https://yangyanghoho.github.io" # your host, for absolute URL
+url: "https://yangyanghoho.github.io/blog" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
