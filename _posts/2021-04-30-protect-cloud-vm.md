@@ -27,7 +27,7 @@ tags:
 
 但是如果大家有一个可以从公网IP默认SSH端口登陆的服务器，大家就会知道互联网的凶残了，一旦被盯上，暴力破解啊各种乱猜啊就来了，像酱紫：
 
-![](https://yangyanghoho.github.io/img/in-post/post-vm/1.JPG)
+![](https://yangyanghoho.github.io/img/in-post/post-vm/11.JPG)
 
 里面有大量的各种IP用各种用户名尝试登陆并失败的记录，如果我们的服务器用户名很好猜（比如test），密码又简单（比如1234qwer），那被破解就是迟早的事儿嘛。
 
