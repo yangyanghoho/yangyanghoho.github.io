@@ -127,9 +127,7 @@ IOS和Android都可以在wifi里面设置手动代理（https://your_ip:port）�
 
 下载Beta版本并在手机上安装：
 
-```ts
-https://github.com/mozilla-mobile/firefox-android/releases
-```
+[https://github.com/mozilla-mobile/firefox-android/releases](https://github.com/mozilla-mobile/firefox-android/releases)
 
 浏览器地址栏输入about:config进入配置，将下面参数（可以让Firefox信任自签名证书）改为true：
 
@@ -163,3 +161,15 @@ network.proxy.type
 
 参考文档
 --
+
+* [https://support.kaspersky.com/kwts/6.1/zh-Hans/193662.htm](https://support.kaspersky.com/kwts/6.1/zh-Hans/193662.htm)
+
+* [http://wiki.squid-cache.org/Features/HTTPS](http://wiki.squid-cache.org/Features/HTTPS)
+
+* [https://www.chromium.org/developers/design-documents/secure-web-proxy/](https://www.chromium.org/developers/design-documents/secure-web-proxy/)
+
+* [https://developer.apple.com/forums/thread/655287](https://developer.apple.com/forums/thread/655287)
+
+* [https://www.topbug.net/blog/2015/03/02/configure-proxy-using-pac-files-on-firefox-for-android/](https://www.topbug.net/blog/2015/03/02/configure-proxy-using-pac-files-on-firefox-for-android/)
+
+* [https://adguard.com/kb/adguard-for-android/solving-problems/firefox-certificates/](https://adguard.com/kb/adguard-for-android/solving-problems/firefox-certificates/)
