@@ -152,11 +152,11 @@ network.proxy.type
 另外需要注意的是，每次重新打开浏览器之后第一个参数都会重置为false，参考下面的步骤永久打开这个参数：
 
 ```ts
-    Run the browser.
-    Go to Settings → About Firefox.
-    Tap the Firefox logo five times.
-    Navigate to Settings → Secret Settings.
-    Toggle Use third party CA certificates.
+Run the browser.
+Go to Settings → About Firefox.
+Tap the Firefox logo five times.
+Navigate to Settings → Secret Settings.
+Toggle Use third party CA certificates.
 ```
 
 参考文档
