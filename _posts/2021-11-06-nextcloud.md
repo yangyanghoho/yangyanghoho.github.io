@@ -173,9 +173,7 @@ sudo mkdir -p /usr/share/nginx/html/nextcloud/data/
 
 Nextcloud的官方网站给出了两种配置nginx的方法。
 
-```ts
-https://docs.nextcloud.com/server/20/admin_manual/installation/nginx.html
-```
+[https://docs.nextcloud.com/server/20/admin_manual/installation/nginx.html](https://docs.nextcloud.com/server/20/admin_manual/installation/nginx.html)
 
 我选用其中一种子目录的方式，也就是说最后访问nextcloud应该是酱紫的：
 
@@ -217,3 +215,179 @@ http://your_domain/nextcloud
 将生成的crt和key填到nginx的配置里面，再把80端口的监听改成301重定向到https就行啦！
 
 最后，祝大家玩的愉快！倒腾这类东西一定要注意心态呀。
+
+
+NGINX配置参考
+--
+
+```ts
+upstream php-handler {
+    server 127.0.0.1:9000;
+    #server unix:/var/run/php/php7.4-fpm.sock;
+}
+
+server {
+    listen 80;
+    server_name www.example.com;
+
+    # Enforce HTTPS
+    return 301 https://$server_name$request_uri;
+
+}
+
+server {
+    listen 443      ssl http2;
+    server_name www.example.com;
+
+    ssl_certificate     /etc/ssl/nginx/nginx.crt;
+    ssl_certificate_key /etc/ssl/nginx/nginx.key;
+    ssl_protocols  TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4:!DH:!DHE;
+    ssl_prefer_server_ciphers on;
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    # Path to the root of the domain
+    root /usr/share/nginx/html;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    location ~ \.(gif|jpg|jpeg|png)$ {
+        expires 1h;
+        gzip on;
+            root /usr/share/nginx/html;
+    }
+
+    error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    location ~ \.php$ {
+        root           /usr/share/nginx/html;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+
+    location ^~ /nextcloud {
+        # set max upload size
+        client_max_body_size 512M;
+        fastcgi_buffers 64 4K;
+
+        # Enable gzip but do not remove ETag headers
+        gzip on;
+        gzip_vary on;
+        gzip_comp_level 4;
+        gzip_min_length 256;
+        gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
+        gzip_types application/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
+
+        # Pagespeed is not supported by Nextcloud, so if your server is built
+        # with the `ngx_pagespeed` module, uncomment this line to disable it.
+        #pagespeed off;
+
+        # HTTP response headers borrowed from Nextcloud `.htaccess`
+        add_header Referrer-Policy                      "no-referrer"   always;
+        add_header X-Content-Type-Options               "nosniff"       always;
+        add_header X-Download-Options                   "noopen"        always;
+        add_header X-Frame-Options                      "SAMEORIGIN"    always;
+        add_header X-Permitted-Cross-Domain-Policies    "none"          always;
+        add_header X-Robots-Tag                         "none"          always;
+        add_header X-XSS-Protection                     "1; mode=block" always;
+
+        # Remove X-Powered-By, which is an information leak
+        fastcgi_hide_header X-Powered-By;
+
+        # Specify how to handle directories -- specifying `/nextcloud/index.php$request_uri`
+        # here as the fallback means that Nginx always exhibits the desired behaviour
+        # when a client requests a path that corresponds to a directory that exists
+        # on the server. In particular, if that directory contains an index.php file,
+        # that file is correctly served; if it doesn't, then the request is passed to
+        # the front-end controller. This consistent behaviour means that we don't need
+        # to specify custom rules for certain paths (e.g. images and other assets,
+        # `/updater`, `/ocm-provider`, `/ocs-provider`), and thus
+        # `try_files $uri $uri/ /nextcloud/index.php$request_uri`
+        # always provides the desired behaviour.
+        index index.php index.html /nextcloud/index.php$request_uri;
+
+        # Rule borrowed from `.htaccess` to handle Microsoft DAV clients
+        location = /nextcloud {
+            if ( $http_user_agent ~ ^DavClnt ) {
+                return 302 /nextcloud/remote.php/webdav/$is_args$args;
+            }
+        }
+
+        # Rules borrowed from `.htaccess` to hide certain paths from clients
+        location ~ ^/nextcloud/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/)    { return 404; }
+        location ~ ^/nextcloud/(?:\.|autotest|occ|issue|indie|db_|console)                { return 404; }
+
+        # Ensure this block, which passes PHP files to the PHP process, is above the blocks
+        # which handle static assets (as seen below). If this block is not declared first,
+        # then Nginx will encounter an infinite rewriting loop when it prepends
+        # `/nextcloud/index.php` to the URI, resulting in a HTTP 500 error response.
+        location ~ \.php(?:$|/) {
+            # Required for legacy support
+            #rewrite ^/(?!index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+|.+\/richdocumentscode\/proxy) /nextcloud/index.php$request_uri;
+
+            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+            set $path_info $fastcgi_path_info;
+
+            try_files $fastcgi_script_name =404;
+
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $path_info;
+            fastcgi_param HTTPS on;
+
+            fastcgi_param modHeadersAvailable true;         # Avoid sending the security headers twice
+            fastcgi_param front_controller_active true;     # Enable pretty urls
+            fastcgi_pass php-handler;
+
+            fastcgi_intercept_errors on;
+            fastcgi_request_buffering off;
+        }
+
+        location ~ \.(?:css|js|svg|gif)$ {
+            try_files $uri /nextcloud/index.php$request_uri;
+            expires 6M;         # Cache-Control policy borrowed from `.htaccess`
+            access_log off;     # Optional: Don't log access to assets
+        }
+
+        location ~ \.woff2?$ {
+            try_files $uri /nextcloud/index.php$request_uri;
+            expires 7d;         # Cache-Control policy borrowed from `.htaccess`
+            access_log off;     # Optional: Don't log access to assets
+        }
+
+        location /nextcloud {
+            try_files $uri $uri/ /nextcloud/index.php$request_uri;
+        }
+    }
+
+}
+```
