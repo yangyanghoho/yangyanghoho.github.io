@@ -20,7 +20,7 @@ tags:
 
 于是开始研究用python发送，还是比较简单。代码如下：
 
-```ts
+```python
 import sys,socket
  
 UDP_SRC_IP = "39.1.1.2"
