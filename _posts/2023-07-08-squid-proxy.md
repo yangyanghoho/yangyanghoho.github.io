@@ -8,6 +8,7 @@ tags:
   - Linux
   - Squid
   - Proxy
+  - CentOS
 ---
 
 > 这篇文章转载自[我的公众号](https://mp.weixin.qq.com/s/Q9sCmEZAWp6eAJtF9QAu8Q)
