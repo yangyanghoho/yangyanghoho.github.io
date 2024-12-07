@@ -151,12 +151,14 @@ API_KEY="app-your_api_key"
 curl -X POST $DIFY_API \
 --header "Authorization: Bearer $API_KEY" \
 --header 'Content-Type: application/json' \
---data '{
+--data-raw '{
     "inputs": {},
     "response_mode": "blocking",
     "user": "bot"
 }'
 ```
+
+curl版本不太新的话，可以将data-raw改成data。
 
 给脚本可执行权限后，可以直接执行脚本并测试。
 
