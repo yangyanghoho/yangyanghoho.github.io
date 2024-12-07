@@ -24,7 +24,7 @@ tags:
 * 大语言模型的API key，这里我用Azure OpenAI的API key。
 
 
-试用Dify
+访问Dify
 --
 
 登录Dify，在'设置'-'模型供应商'里按情况填上自己的API Key等信息。
