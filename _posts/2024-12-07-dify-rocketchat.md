@@ -31,7 +31,7 @@ tags:
 
 [https://cloud.dify.ai](https://cloud.dify.ai)
 
-然后在'工作室'-'创建空白应用'处选择'工作流'并命名：
+然后在[工作室]-[创建空白应用]处选择[工作流]并命名：
 
 ![](https://yangyanghoho.github.io/img/in-post/post-dify/d1.jpg)
 
@@ -137,7 +137,7 @@ RocketChat Webhook
 定时任务访问API
 --
 
-Dify工作流支持API调用，在工作流页面左侧点击'访问API'，在右侧点击'API密钥'，保存生成的API key。
+Dify工作流支持API调用，在工作流页面左侧点击[访问API]，在右侧点击[API密钥]，保存生成的API key。
 
 在云服务器上新建shell脚本：
 
