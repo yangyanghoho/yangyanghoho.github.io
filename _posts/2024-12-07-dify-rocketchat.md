@@ -27,7 +27,7 @@ tags:
 访问Dify
 --
 
-登录Dify，在'设置'-'模型供应商'里按情况填上自己的API Key等信息。
+登录Dify，在[设置]-[模型供应商]里按情况填上自己的API Key等信息。
 
 [https://cloud.dify.ai](https://cloud.dify.ai)
 
