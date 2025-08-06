@@ -28,7 +28,7 @@ Nextcloud项目官方站点：
 
 [https://nextcloud.com/](https://nextcloud.com/)
 
-![](https://yangyanghoho.github.io/img/in-post/post-nextcloud/11111.jpg)
+![](https://yangzai.tech/img/in-post/post-nextcloud/11111.jpg)
 
 手头上有一台CentOS的公有云虚拟机，那这次就用这台VM来尝试安装Nextcloud吧。
 
@@ -198,11 +198,11 @@ http://your_domain/nextcloud
 
 配置页面大概长酱紫：
 
-![](https://yangyanghoho.github.io/img/in-post/post-nextcloud/22222.jpg)
+![](https://yangzai.tech/img/in-post/post-nextcloud/22222.jpg)
 
 填好参数提交之后就坐等成功啦！用admin密码登陆之后大概酱紫：
 
-![](https://yangyanghoho.github.io/img/in-post/post-nextcloud/33333.jpg)
+![](https://yangzai.tech/img/in-post/post-nextcloud/33333.jpg)
 
 
 结语
