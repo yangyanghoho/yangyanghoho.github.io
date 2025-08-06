@@ -51,7 +51,7 @@ RocketChat支持两种部署方式，一种是使用其提供的服务器，一�
 
 [http://yourdomain.com:3000](http://yourdomain.com:3000)
 
-![](https://yangyanghoho.github.io/img/in-post/post-chat/11.jpg)
+![](https://yangzai.tech/img/in-post/post-chat/11.jpg)
 
 之后就可以把网页分享给其他朋友来一起聊天了。
 
@@ -86,7 +86,7 @@ openssl x509 -req -in nginx.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out ng
 
 最后，使用iphone安装根证书后访问域名，登陆app：
 
-![](https://yangyanghoho.github.io/img/in-post/post-chat/22.jpg)
+![](https://yangzai.tech/img/in-post/post-chat/22.jpg)
 
 经测试，可以正常发送消息，但是app不在主页的时候没有推送，只能使用rocketchat提供的推送了，自己弄一个IOS推送服务超出我的能力了。rocketchat提供的推送服务见下面网页：
 
