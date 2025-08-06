@@ -99,7 +99,7 @@ systemctl restart squid
 
 测试发现https代理可用，只有一个小瑕疵，https的代理，是需要客户端用http connect提供需要代理的域名，而抓包可见http connect消息是未经TLS加密的明文http消息。类似这样：
 
-![](https://yangyanghoho.github.io/img/in-post/post-squid/11.jpg)
+![](https://yangzai.tech/img/in-post/post-squid/11.jpg)
 
 为了保护隐私，后发现有pac的方法可以实现真正的https代理，具体pac文件例子如下，实现的是去往微软官网时用HTTPS代理服务器，其他网站直连：
 
