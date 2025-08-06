@@ -33,7 +33,7 @@ tags:
 
 然后在[工作室]-[创建空白应用]处选择[工作流]并命名：
 
-![](https://yangzai.tech/img/in-post/post-dify/d1.jpg)
+![](https://{{site.url}}/img/in-post/post-dify/d1.jpg)
 
 
 调试工作流
@@ -41,7 +41,7 @@ tags:
 
 进入新建的工作流，按照下图新建各个组件并将他们连起来：
 
-![](https://yangzai.tech/img/in-post/post-dify/d2.jpg)
+![](https://{{site.url}}/img/in-post/post-dify/d2.jpg)
 
 需要注意的是，天气查询工具需要去这个网址注册并申请一个免费的API key才能使用(注意这个API key需要一段时间才能生效可用，建议报错的话等几个小时再试)：
 
@@ -53,11 +53,11 @@ tags:
 
 然后配置LLM将时间组件和天气组件的输出都作为LLM组件的输入，并配置要发给LLM的system消息，像这样：
 
-![](https://yangzai.tech/img/in-post/post-dify/d3.jpg)
+![](https://{{site.url}}/img/in-post/post-dify/d3.jpg)
 
 最后代码执行组件里，我们运行python代码，将LLM的输出作为输入并通过python发给RocketChat的webhook：
 
-![](https://yangzai.tech/img/in-post/post-dify/d4.jpg)
+![](https://{{site.url}}/img/in-post/post-dify/d4.jpg)
 
 其中的代码如下：
 
