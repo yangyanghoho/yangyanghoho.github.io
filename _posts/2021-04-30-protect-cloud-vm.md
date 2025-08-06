@@ -27,7 +27,7 @@ tags:
 
 但是如果大家有一个可以从公网IP默认SSH端口登陆的服务器，大家就会知道互联网的凶残了，一旦被盯上，暴力破解啊各种乱猜啊就来了，像酱紫：
 
-![](https://yangyanghoho.github.io/img/in-post/post-vm/11.JPG)
+![](https://yangzai.tech/img/in-post/post-vm/11.JPG)
 
 里面有大量的各种IP用各种用户名尝试登陆并失败的记录，如果我们的服务器用户名很好猜（比如test），密码又简单（比如1234qwer），那被破解就是迟早的事儿嘛。
 
@@ -39,7 +39,7 @@ tags:
 
 SSH默认监听TCP的22端口，我们可以通过更改服务器上的SSH配置来更改SSH监听端口，这样对方就需要扫描端口才能知道我们的SSH端口。以CentOS7为“栗”，更改/etc/ssh/sshd_config文件里面的Port：
 
-![](https://yangyanghoho.github.io/img/in-post/post-vm/2.JPG)
+![](https://yangzai.tech/img/in-post/post-vm/2.JPG)
 
 再重启SSH进程即可。
 
@@ -49,7 +49,7 @@ SSH默认监听TCP的22端口，我们可以通过更改服务器上的SSH配置
 
 云服务提供商必然提供入方向的端口过滤功能，所以我们可以通过配置有限制的放通可选端口，并拒绝其他端口的访问请求，像酱紫：
 
-![](https://yangyanghoho.github.io/img/in-post/post-vm/3.JPG)
+![](https://yangzai.tech/img/in-post/post-vm/3.JPG)
 
 用HTTP默认放通80，用HTTPS默认放通443，不要留无用的端口。
 
